@@ -1,0 +1,38 @@
+@import "src/variables.scss";
+
+@media (min-width: 769px){
+  .mobile-phone {
+    height: 707px;
+    padding: 10px 10px 30px;
+    box-shadow: 0 0 20px #6F6F6f;
+    border-radius: 30px;
+    background: $primary-font-color;
+
+    .screen {
+      width: 375px;
+      height: 100%;
+      border-radius: 30px;
+      overflow-y: auto;
+    }
+
+    .brove {
+      width: 150px;
+      height: 20px;
+      background: $brove;
+      z-index: 5;
+      position: absolute;
+      margin: 0 123px;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .speaker {
+      width: 60px;
+      height: 5px;
+      background: $speaker;
+      display: block;
+      margin: auto;
+      margin-top: 5px;
+      border-radius: 20px;
+    }
+  }
+}
