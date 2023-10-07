@@ -1,0 +1,14 @@
+@import "src/variables.scss";
+
+@media (min-width: 769px){
+  .app-container {
+    justify-content: center;
+  }
+
+  .phone-case {
+    padding: 10px;
+    box-shadow: 0 0 20px #6F6F6f;
+    border-radius: 40px;
+    background: $phone-case;
+  }
+}
