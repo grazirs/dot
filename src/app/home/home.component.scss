@@ -254,6 +254,7 @@ h2 {
 section.help-container > a:hover,section.help-container > a:focus  {
   font-weight: 700;
 }
+
 @media (min-width: 769px) {
   .screen {
     width: 355px;
@@ -273,13 +274,11 @@ section.help-container > a:hover,section.help-container > a:focus  {
   }
 
   .help-container {
-    margin-top: 0px;
     padding-right: 0px;
   }
+
   .account-container {
-    // height: 382px;
     padding: 0 10px;
-    justify-content: center;
   }
 
   .operations-body {
