@@ -1,0 +1,239 @@
+@import "src/variables.scss";
+
+main {
+  position: relative;
+}
+
+.home {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  color: $secondary-font-color;
+  font-size: 3.4rem;
+  margin: 20px 20px 10px;
+}
+
+.account-container {
+  height: 56vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: $natural-person-gradient;
+}
+
+.card-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 345px;
+  height: 239px;
+  background: $secondary-bg-color;
+  box-shadow: 0px 3px 30px #0000002f;
+  border-radius: 10px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-account {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.card-name {
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+}
+
+.card-amount,
+.card-amount strong {
+  font-size: 2.6rem;
+  margin-bottom: 5px;
+}
+
+.card-detail,
+.see-all {
+  color: $primary-color;
+  font-size: 1.6rem;
+}
+
+.card-iban {
+  color: $tertiary-font-color;
+  font-size: 1.6rem;
+}
+
+.iban-container {
+  border-top: 1px solid #CCCCCC;
+  padding: 20px;
+}
+
+.card-footer {
+  height: 49px;
+  background: transparent linear-gradient(279deg, #E2F3DB 0%, #E5F4FA 100%) 0% 0% no-repeat padding-box;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-radius: 0 0 10px 10px;
+}
+
+.card-footer span {
+  color: $primary-font-color;
+  font-size: 1.6rem;
+  text-transform: capitalize;
+  opacity: 1;
+  z-index: 1;
+}
+
+.card-footer span:nth-child(2) {
+  font-weight: 700;
+}
+
+.operations-container {
+  background: $secondary-bg-color;
+  padding-top: 30px;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 9px;
+}
+
+.operations-row {
+  height: 82px;
+  align-items: center;
+  padding: 20px;
+  border-top: 1px solid #CCCCCC;
+}
+
+.operations-body {
+  /*height: 210px;*/
+  height: 31vh;
+  overflow-y: scroll;
+}
+
+.operations-header {
+  padding: 0 20px;
+}
+
+.operations-row {
+  background-color: $secondary-bg-color;
+}
+
+.operations-icon {
+  width: 45px;
+  height: 45px;
+}
+
+.operation-description {
+  width: 195px;
+  margin: 0 15px;
+}
+
+.operation-date {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.operation-detail {
+  font-size: 1.4rem;
+}
+
+.operation-amount span:first-child,
+.operation-amount>span>b {
+  font-size: 1.6rem;
+  color: $primary-color;
+}
+
+.bottom-bar {
+  width: 100vw;
+  height: 55px;
+  background: $secondary-bg-color;
+  box-shadow: 0px 0px 8px #CCCCCC;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.bottom-bar img {
+  width: 25px;
+  height: 25px;
+  margin-bottom: 5px;
+}
+
+.bottom-bar ul {
+  width: 100vw;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bottom-bar .column {
+  align-items: center;
+}
+
+.fab {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  background: $primary-color;
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.fab {
+  font-size: 1.4rem;
+}
+
+.fab:hover,
+.fab:focus {
+  background: $natural-person-gradient;
+}
+
+#dot-img {
+  width: 25px;
+}
+
+.operation-account {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 16px;
+}
+
+.operation-account img {
+  margin-right: 10px;
+}
+
+.operation-account span {
+  font-size: 1.2rem;
+}
+
+@media (min-width: 769px) {
+
+  .home,
+  .bottom-bar {
+    width: 375px;
+  }
+
+  .account-container {
+    height: 382px;
+  }
+
+  .operations-body {
+    height: 167px;
+  }
+}
