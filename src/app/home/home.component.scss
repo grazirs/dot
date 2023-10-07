@@ -3,6 +3,35 @@
 main {
   position: relative;
 }
+.help-container{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  color: $secondary-font-color;
+  padding-right: 20px;
+  margin-top: 30px;
+}
+
+.help-container img {
+  width:  15px;
+  height: 15px;
+  margin-bottom: 5px;
+}
+
+.help-container a img {
+  width:  20px;
+  height: 20px;
+  margin-bottom: 5px;
+}
+
+.help-container div {
+  align-items: center;
+}
+.help-container a {
+  color: $secondary-font-color;
+  margin-left: 17px;
+  align-items: center;
+}
 
 .home {
   width: 100vw;
@@ -13,14 +42,13 @@ main {
 h1 {
   color: $secondary-font-color;
   font-size: 3.4rem;
-  margin: 20px 20px 10px;
+  margin: 0px 20px 10px;
 }
 
 .account-container {
-  height: 56vh;
+  height: 412px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   background: $natural-person-gradient;
 }
 
@@ -161,7 +189,8 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  position: fixed;
+  bottom: 0;
 }
 
 .bottom-bar img {
@@ -222,18 +251,42 @@ h2 {
   font-size: 1.2rem;
 }
 
+section.help-container > a:hover,section.help-container > a:focus  {
+  font-weight: 700;
+}
 @media (min-width: 769px) {
+  .screen {
+    width: 355px;
+    height: 100%;
+    border-radius: 30px;
+    overflow-y: auto;
+    position: relative;
+  }
 
   .home,
   .bottom-bar {
-    width: 375px;
+    width: 355px;
   }
 
+  h1 {
+    margin: 0px 0px 10px;
+  }
+
+  .help-container {
+    margin-top: 0px;
+    padding-right: 0px;
+  }
   .account-container {
-    height: 382px;
+    // height: 382px;
+    padding: 0 10px;
+    justify-content: center;
   }
 
   .operations-body {
     height: 167px;
+  }
+
+  .bottom-bar {
+    position: relative;
   }
 }

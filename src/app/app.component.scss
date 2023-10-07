@@ -1,19 +1,16 @@
 @import "src/variables.scss";
 
 @media (min-width: 769px){
-  .mobile-phone {
-    height: 707px;
-    padding: 10px 10px 30px;
-    box-shadow: 0 0 20px #6F6F6f;
-    border-radius: 30px;
-    background: $primary-font-color;
+  .app-container {
+    justify-content: center;
+  }
 
-    .screen {
-      width: 375px;
-      height: 100%;
-      border-radius: 30px;
-      overflow-y: auto;
-    }
+  .mobile-phone {
+    // height: 707px;
+    padding: 10px;
+    box-shadow: 0 0 20px #6F6F6f;
+    border-radius: 40px;
+    background: $phone-case;
 
     .brove {
       width: 150px;
