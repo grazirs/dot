@@ -1,1 +1,62 @@
-/* You can add global styles to this file, and also import other style files */
+@import "variables";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 10px;
+    font-family: $primary-font;
+}
+
+html {
+  height: 100%;
+
+  body {
+    margin: 0;
+    background-color: $primary-bg-color;
+    -webkit-backface-visibility: hidden;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+
+      .app-container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: $primary-bg-color;
+      }
+  }
+}
+
+a {
+  color: $primary-font-color;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 250ms ease-in-out;
+
+  &:hover, &:focus  {
+    color: $primary-color;
+  }
+  &:visited {
+    color: $secondary-font-color;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+ul, li {
+  list-style: none;
+}
