@@ -36,7 +36,12 @@
     </ng-template>
   </main>
   <section class="input-area row">
-    <input type="text" placeholder="Scrivi qui">
+    <form (ngSubmit)="submit()" class="row">
+      <input type="text" placeholder="Scrivi qui" [formControl]="textMessage">
+      <button class="btn-submit" type="submit">
+        <img src="../../assets/images/send.svg" alt="icone invia messagio" *ngIf="(textMessage.value?? '').length > 0">
+      </button>
+    </form>
     <button class="icon-container" (click)="startVoiceRecognition()">
       <img src="../../assets/images/microphone-white.svg" alt="icone microfono" class="icon">
     </button>
