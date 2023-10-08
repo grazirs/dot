@@ -142,8 +142,7 @@ h2 {
 }
 
 .operations-body {
-  /*height: 210px;*/
-  height: 31vh;
+  height: calc(100vh - 527px);
   overflow-y: scroll;
 }
 
