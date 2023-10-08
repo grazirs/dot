@@ -1,6 +1,7 @@
 import {Component, NgZone} from '@angular/core';
 import {AssistantService, Message} from '../assistant.service';
 import {VoiceRecognitionService} from '../voice-recognition.service';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-dot-assistant',
@@ -9,6 +10,7 @@ import {VoiceRecognitionService} from '../voice-recognition.service';
 })
 export class DotAssistantComponent {
   messages: Message[] = [];
+  textMessage = new FormControl('');
 
   constructor(
     public assistantService: AssistantService,
@@ -50,4 +52,8 @@ export class DotAssistantComponent {
     })
   }
 
+  submit() {
+    if (this.textMessage.value) this.sendMessage(this.textMessage.value);
+    this.textMessage.reset();
+  }
 }
