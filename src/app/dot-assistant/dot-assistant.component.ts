@@ -1,6 +1,7 @@
-import {Component, NgZone} from '@angular/core';
-import {AssistantService, Message} from '../assistant.service';
+import {ChangeDetectorRef, Component, NgZone} from '@angular/core';
+import {AssistantService} from '../assistant.service';
 import {VoiceRecognitionService} from '../voice-recognition.service';
+import {liveQuery} from "dexie";
 import {FormControl} from '@angular/forms';
 
 @Component({
@@ -9,46 +10,27 @@ import {FormControl} from '@angular/forms';
   styleUrls: ['./dot-assistant.component.scss'],
 })
 export class DotAssistantComponent {
-  messages: Message[] = [];
+  messages$ = liveQuery(() => this.assistantService.messages);
   textMessage = new FormControl('');
 
   constructor(
     public assistantService: AssistantService,
-    private voiceRecognitionService: VoiceRecognitionService,
-    private zone: NgZone,
+    public voiceRecognitionService: VoiceRecognitionService,
+    private cdr: ChangeDetectorRef
   ) {
-    this.messages = this.assistantService.conversation;
-    this.voiceRecognitionService.voiceListener$.subscribe((result) => {
+    this.messages$.subscribe(() => this.cdr.detectChanges());
+    this.voiceRecognitionService.voices$.subscribe((result) => {
       if (result?.transcript) this.sendMessage(result.transcript);
     });
-    if (!this.assistantService.sessionId) this.assistantService.createSession().subscribe();
   }
 
-  startRecord() {
+  startVoiceRecognition() {
     this.voiceRecognitionService.startSpeechToText();
   }
 
-  stopRecord() {
-    this.voiceRecognitionService.stopSpeechToText();
-  }
-
   sendMessage(text: string) {
-    const message: Message = {
-      sender: 'You',
-      text,
-      direction: 'SENT',
-      createdAt: new Date(),
-    }
-    this.messages.push(message);
     this.assistantService.sendMessage(text).subscribe((response) => {
-      const message: Message = {
-        sender: 'Dot',
-        text: response.text,
-        direction: 'RECEIVED',
-        createdAt: new Date(),
-      }
       this.voiceRecognitionService.readText(response.text);
-      this.zone.run(() => this.messages.push(message));
     })
   }
 

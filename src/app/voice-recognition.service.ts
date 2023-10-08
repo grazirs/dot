@@ -15,31 +15,27 @@ const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogni
 })
 export class VoiceRecognitionService {
   private recognition: typeof SpeechRecognition;
-  private listening = false;
-  voiceListener$ = new BehaviorSubject<SpeechRecognitionAlternative | null>(null);
+  voices$ = new BehaviorSubject<SpeechRecognitionAlternative | null>(null);
+  listening$ = new BehaviorSubject(false);
 
   constructor() {
     this.recognition = new SpeechRecognition();
     this.recognition.lang = 'it-IT';
     this.recognition.onresult = (event: { results: SpeechRecognitionResultList }) => {
-      this.voiceListener$.next(event.results.item(0).item(0));
+      this.voices$.next(event.results.item(0).item(0));
     }
     this.recognition.onerror = (error: any) => console.error('error: ', error);
+    this.recognition.onend = () => this.listening$.next(false);
   }
 
   startSpeechToText() {
-    if (this.listening) return;
-    this.listening = true;
+    this.listening$.next(true);
     this.recognition.start();
   }
 
-  stopSpeechToText() {
-    this.recognition.stop();
-    this.listening = false;
-  }
-
-  readText(text:string){
+  readText(text: string) {
     const utter = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utter);
   }
 }
