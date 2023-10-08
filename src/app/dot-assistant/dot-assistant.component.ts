@@ -1,6 +1,6 @@
-import { Component, NgZone } from '@angular/core';
-import { AssistantService, Message } from '../assistant.service';
-import { VoiceRecognitionService } from '../voice-recognition.service';
+import {Component, NgZone} from '@angular/core';
+import {AssistantService, Message} from '../assistant.service';
+import {VoiceRecognitionService} from '../voice-recognition.service';
 
 @Component({
   selector: 'app-dot-assistant',
@@ -14,25 +14,23 @@ export class DotAssistantComponent {
     public assistantService: AssistantService,
     private voiceRecognitionService: VoiceRecognitionService,
     private zone: NgZone,
-  ){
+  ) {
     this.messages = this.assistantService.conversation;
     this.voiceRecognitionService.voiceListener$.subscribe((result) => {
-      if(result?.transcript){
-        this.sendMessage(result.transcript);
-      }
+      if (result?.transcript) this.sendMessage(result.transcript);
     });
-    this.assistantService.createSession().subscribe();
+    if (!this.assistantService.sessionId) this.assistantService.createSession().subscribe();
   }
 
-  startRecord(){
+  startRecord() {
     this.voiceRecognitionService.startSpeechToText();
   }
 
-  stopRecord(){
+  stopRecord() {
     this.voiceRecognitionService.stopSpeechToText();
   }
 
-  sendMessage(text: string){
+  sendMessage(text: string) {
     const message: Message = {
       sender: 'You',
       text,
