@@ -5,7 +5,11 @@
         <img src="../../assets/images/arrow-white.svg" alt="">
         Indientro
       </a>
-      <div class="dot-logo"></div>
+      <div class="row dot-logo-container">
+        <div class="dot-logo"></div>
+        <span>dot.</span>
+      </div>
+
     </div>
   </header>
   <main class="chat-container">
@@ -21,7 +25,13 @@
       </div>
     </ng-container>
     <ng-template #loading>
-      <p>Caricamento...</p>
+      <div class="loader-container">
+        <div class="loader">
+          <div class="dot-loader-circle"></div>
+          <div class="dot-loader"></div>
+        </div>
+        <p>caricamento</p>
+      </div>
     </ng-template>
   </main>
   <section class="input-area row">

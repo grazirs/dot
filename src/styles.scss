@@ -59,3 +59,43 @@ a {
 ul, li {
   list-style: none;
 }
+
+.dot-logo-container {
+  align-items: center;
+}
+
+.dot-logo-container span {
+  font-size: 1.7rem;
+  color: $secondary-font-color;
+}
+
+.dot-logo {
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border-radius: 50%;
+  position: relative;
+}
+
+.dot-logo::after {
+  position: absolute;
+  content: '';
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid $secondary-bg-color;
+  left: 7px;
+  top: 7px;
+}
+
+.dot-logo::before {
+  position: absolute;
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid $secondary-bg-color;
+  background: $secondary-bg-color;
+  left: 17px;
+  top: 17px;
+}
