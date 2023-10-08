@@ -9,74 +9,20 @@
     </div>
   </header>
   <main class="chat-container">
-    <div class="dot column">
-      <span class="dot-chat">dot</span>
-      <div class="dot-chat-container column">
-        <p>some text here Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident nobis quos similique
-          aspernatur saepe illum veritatis natus iste est. Voluptatem, nostrum consequuntur rerum odio inventore eveniet
-          ipsum temporibus non repellat.</p>
-          <span>12:32</span>
-      </div>
+    <div *ngFor="let message of messages">
+      <div class="column" [ngClass]="message.sender === 'Dot' ? 'dot' : 'user'">
+        <span [ngClass]="message.sender === 'Dot' ? 'dot-chat' : 'user-chat'">{{message.sender}}</span>
+        <div [ngClass]="message.sender === 'Dot' ? 'dot-chat-container' : 'user-chat-container'" class="dot-chat-container column">
+          <p>{{message.text}}</p>
+          <span>{{message.createdAt | date:'shortTime'}}</span>
+        </div>
     </div>
-    <div class="user column">
-      <span class="user-chat">tu</span>
-      <div class="user-chat-container column">
-        <p>typing something here</p>
-        <span>12:36</span>
-      </div>
-    </div>
-    <div class="dot column">
-      <span class="dot-chat">dot</span>
-      <div class="dot-chat-container">
-        <p>some text here</p>
-      </div>
-    </div>
-    <div class="user column">
-      <span class="user-chat">tu</span>
-      <div class="user-chat-container">
-        <p>typing something here Lorem ipsum, dolor sit</p>
-      </div>
-    </div>
-    <div class="dot column">
-      <span class="dot-chat">dot</span>
-      <div class="dot-chat-container">
-        <p>some text here</p>
-      </div>
-    </div>
-    <div class="user column">
-      <span class="user-chat">tu</span>
-      <div class="user-chat-container">
-        <p>typing something here Lorem ipsum, dolor sit</p>
-      </div>
-    </div>
-    <div class="dot column">
-      <span class="dot-chat">dot</span>
-      <div class="dot-chat-container">
-        <p>some text here</p>
-      </div>
-    </div>
-    <div class="user column">
-      <span class="user-chat">tu</span>
-      <div class="user-chat-container">
-        <p>typing something here Lorem ipsum, dolor sit</p>
-      </div>
-    </div>
-    <div class="dot column">
-      <span class="dot-chat">dot</span>
-      <div class="dot-chat-container">
-        <p>some text here</p>
-      </div>
-    </div>
-    <div class="user column">
-      <span class="user-chat">tu</span>
-      <div class="user-chat-container">
-        <p>typing something here Lorem ipsum, dolor sit</p>
-      </div>
     </div>
   </main>
   <section class="input-area row">
     <input type="text" placeholder="Scrivi qui">
-    <button class="icon-container">
+    <button class="icon-container" (mousedown)="startRecord()"
+    (mouseup)="stopRecord()">
       <img src="../../assets/images/microphone-white.svg" alt="icone microfono" class="icon">
     </button>
   </section>

@@ -61,7 +61,7 @@ header a {
   width: 100vw;
   border-radius: 40px 40px 0 0;
   margin-top: -40px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .input-area{
@@ -156,7 +156,7 @@ header a {
   }
 
   header {
-    border-radius: 40px 40px 0 0;
+    border-radius: 30px 30px 0 0;
   }
   .chat-container {
     height: 560px;
@@ -165,7 +165,7 @@ header a {
 
   .input-area {
     position: relative;
-    border-radius: 0 0 40px 40px;
+    border-radius: 0 0 30px 30px;
   }
   .input-area input {
     width: 80%;

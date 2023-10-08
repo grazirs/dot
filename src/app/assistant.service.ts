@@ -49,7 +49,7 @@ export class AssistantService {
 
 }
 
-interface Message {
+export interface Message {
   sender: string;
   text: string;
   direction: 'RECEIVED' | 'SENT';
