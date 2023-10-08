@@ -1,9 +1,10 @@
+<!-- TODO <H1 *ngIf="voiceRecognitionService.listening$ | async as listening">Listening</H1> -->
 <div class="screen">
   <header>
     <div class="row back-container">
       <a [routerLink]="['/']" class="back-btn">
         <img src="../../assets/images/arrow-white.svg" alt="">
-        Indientro
+        Indietro
       </a>
       <div class="row dot-logo-container">
         <div class="dot-logo"></div>
@@ -14,10 +15,10 @@
   </header>
   <main class="chat-container">
     <ng-container *ngIf="assistantService.sessionId; else loading">
-      <div *ngFor="let message of messages">
-        <div class="column" [ngClass]="message.sender === 'Dot' ? 'dot' : 'user'">
-          <span [ngClass]="message.sender === 'Dot' ? 'dot-chat' : 'user-chat'">{{message.sender}}</span>
-          <div [ngClass]="message.sender === 'Dot' ? 'dot-chat-container' : 'user-chat-container'" class="dot-chat-container column">
+      <div *ngFor="let message of messages$ | async">
+        <div class="column" [ngClass]="message.direction === 'RECEIVED' ? 'dot' : 'user'">
+          <span [ngClass]="message.direction === 'RECEIVED' ? 'dot-chat' : 'user-chat'">{{message.sender}}</span>
+          <div [ngClass]="message.direction === 'RECEIVED' ? 'dot-chat-container' : 'user-chat-container'" class="dot-chat-container column">
             <p>{{message.text}}</p>
             <span>{{message.createdAt | date:'shortTime'}}</span>
           </div>
@@ -36,8 +37,7 @@
   </main>
   <section class="input-area row">
     <input type="text" placeholder="Scrivi qui">
-    <button class="icon-container" (mousedown)="startRecord()"
-    (mouseup)="stopRecord()">
+    <button class="icon-container" (click)="startVoiceRecognition()">
       <img src="../../assets/images/microphone-white.svg" alt="icone microfono" class="icon">
     </button>
   </section>
