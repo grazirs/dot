@@ -2,7 +2,9 @@
 
 main {
   position: relative;
+  height: calc(100vh - 55px);
 }
+
 .help-container{
   display: flex;
   justify-content: end;
@@ -58,6 +60,22 @@ h1 {
   justify-content: center;
 }
 
+.card-container img {
+  width: 25px;
+}
+
+.show, .favorite, .share{
+  align-items: center;
+}
+
+.show span, .favorite span, .share span{
+  font-size: 1.2rem;
+}
+
+.favorite{
+  margin-bottom: 15px;
+}
+
 .card {
   width: 345px;
   height: 239px;
@@ -100,6 +118,12 @@ h1 {
 .iban-container {
   border-top: 1px solid #CCCCCC;
   padding: 20px;
+  align-items: center;
+}
+
+.iban-container img {
+  width: 16px;
+  height: 20px;
 }
 
 .card-footer {
@@ -188,8 +212,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
-  bottom: 0;
+  position: absolute;
 }
 
 .bottom-bar img {
@@ -213,16 +236,18 @@ h2 {
   right: 20px;
   bottom: 20px;
   background: $primary-color;
-  border-radius: 50%;
-  width: 65px;
-  height: 65px;
-  padding: 10px;
+  border-radius: 25px;
+  width: fit-content;
+  height: 50px;
+  padding: 0px 10px 0px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
 }
 
+.dot-logo {
+  width: 45px;
+}
 .fab {
   font-size: 1.4rem;
 }
@@ -255,9 +280,11 @@ section.help-container > a:hover,section.help-container > a:focus  {
 }
 
 @media (min-width: 769px) {
+  main{
+    height: 100%;
+  }
   .screen {
     width: 355px;
-    height: 100%;
     border-radius: 30px;
     overflow-y: auto;
     position: relative;
