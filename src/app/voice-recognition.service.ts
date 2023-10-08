@@ -20,6 +20,7 @@ export class VoiceRecognitionService {
 
   constructor() {
     this.recognition = new SpeechRecognition();
+    this.recognition.lang = 'it-IT';
     this.recognition.onresult = (event: { results: SpeechRecognitionResultList }) => {
       this.voiceListener$.next(event.results.item(0).item(0));
     }

@@ -15,12 +15,7 @@ export class AssistantService {
       text: 'Hi, I\'m dot!',
       direction: 'RECEIVED',
       createdAt: new Date(),
-    }, {
-      sender: 'You',
-      text: 'Hi dot!',
-      direction: 'SENT',
-      createdAt: new Date(),
-    }
+    },
   ];
   sessionId?: string;
 

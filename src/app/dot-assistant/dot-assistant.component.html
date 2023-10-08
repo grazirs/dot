@@ -9,15 +9,20 @@
     </div>
   </header>
   <main class="chat-container">
-    <div *ngFor="let message of messages">
-      <div class="column" [ngClass]="message.sender === 'Dot' ? 'dot' : 'user'">
-        <span [ngClass]="message.sender === 'Dot' ? 'dot-chat' : 'user-chat'">{{message.sender}}</span>
-        <div [ngClass]="message.sender === 'Dot' ? 'dot-chat-container' : 'user-chat-container'" class="dot-chat-container column">
-          <p>{{message.text}}</p>
-          <span>{{message.createdAt | date:'shortTime'}}</span>
+    <ng-container *ngIf="assistantService.sessionId; else loading">
+      <div *ngFor="let message of messages">
+        <div class="column" [ngClass]="message.sender === 'Dot' ? 'dot' : 'user'">
+          <span [ngClass]="message.sender === 'Dot' ? 'dot-chat' : 'user-chat'">{{message.sender}}</span>
+          <div [ngClass]="message.sender === 'Dot' ? 'dot-chat-container' : 'user-chat-container'" class="dot-chat-container column">
+            <p>{{message.text}}</p>
+            <span>{{message.createdAt | date:'shortTime'}}</span>
+          </div>
         </div>
-    </div>
-    </div>
+      </div>
+    </ng-container>
+    <ng-template #loading>
+      <p>Caricamento...</p>
+    </ng-template>
   </main>
   <section class="input-area row">
     <input type="text" placeholder="Scrivi qui">
