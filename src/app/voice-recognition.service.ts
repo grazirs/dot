@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, NgZone} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 
 declare global {
@@ -18,14 +18,14 @@ export class VoiceRecognitionService {
   voices$ = new BehaviorSubject<SpeechRecognitionAlternative | null>(null);
   listening$ = new BehaviorSubject(false);
 
-  constructor() {
+  constructor(private zone: NgZone) {
     this.recognition = new SpeechRecognition();
     this.recognition.lang = 'it-IT';
     this.recognition.onresult = (event: { results: SpeechRecognitionResultList }) => {
       this.voices$.next(event.results.item(0).item(0));
     }
-    this.recognition.onerror = (error: any) => console.error('error: ', error);
-    this.recognition.onend = () => this.listening$.next(false);
+    this.recognition.onerror = () => this.listening$.next(false);
+    this.recognition.onend = () => this.zone.run(() => this.listening$.next(false));
   }
 
   startSpeechToText() {
