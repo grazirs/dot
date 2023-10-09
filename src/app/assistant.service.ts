@@ -18,7 +18,6 @@ const INITIAL_MESSAGE: Message = {
   providedIn: 'root'
 })
 export class AssistantService {
-  conversation: Message[] = [];
   sessionId: string | null = null;
 
   constructor(private http: HttpClient, private voiceRecognitionService: VoiceRecognitionService) {
@@ -47,7 +46,7 @@ export class AssistantService {
         sessionId: this.sessionId,
         lastInteractionAt: new Date(),
       });
-      db.messages.add(INITIAL_MESSAGE);
+      this.saveMessage(INITIAL_MESSAGE.text, INITIAL_MESSAGE.direction);
       this.voiceRecognitionService.readText(INITIAL_MESSAGE.text);
     }));
   }
@@ -60,30 +59,24 @@ export class AssistantService {
     })
   }
 
-  get messages() {
-    return db.messages.toArray();
+  saveMessage(text: string, direction: Message['direction']) {
+    const message: Message = {
+      createdAt: new Date(),
+      direction: direction,
+      sender: direction == 'SENT' ? 'Tu' : 'Dot',
+      text,
+    };
+    return db.messages.add(message);
   }
 
   sendMessage(text: string) {
     if (!this.sessionId) throw new Error('SessionId not set');
-    db.messages.add(
-      {
-        createdAt: new Date(),
-        direction: 'SENT',
-        sender: "Tu",
-        text,
-      }
-    );
+    this.saveMessage(text, 'SENT');
     return this.http.post<{ text: string }>(`${BASE_URL}/message`, {sessionId: this.sessionId, text: text})
       .pipe(
         tap((result) => {
           this.touchSession();
-          db.messages.add({
-            createdAt: new Date(),
-            direction: 'RECEIVED',
-            sender: "Dot",
-            text: result.text,
-          })
+          this.saveMessage(result.text, 'RECEIVED');
         })
       );
   }

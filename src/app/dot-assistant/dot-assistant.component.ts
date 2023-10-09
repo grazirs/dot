@@ -1,17 +1,20 @@
-import {ChangeDetectorRef, Component, ElementRef, NgZone, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {AssistantService} from '../assistant.service';
 import {VoiceRecognitionService} from '../voice-recognition.service';
-import {liveQuery} from "dexie";
 import {FormControl} from '@angular/forms';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {liveQuery} from "dexie";
+import {db} from "../db";
 
+@UntilDestroy()
 @Component({
   selector: 'app-dot-assistant',
   templateUrl: './dot-assistant.component.html',
   styleUrls: ['./dot-assistant.component.scss'],
 })
-export class DotAssistantComponent {
-  messages$ = liveQuery(() => this.assistantService.messages);
+export class DotAssistantComponent implements OnInit {
+  messages$ = liveQuery(() => db.messages.toArray())
   textMessage = new FormControl('');
   listening$: Observable<boolean>;
 
@@ -21,10 +24,15 @@ export class DotAssistantComponent {
     private cdr: ChangeDetectorRef,
   ) {
     this.listening$ = this.voiceRecognitionService.listening$;
+  }
+
+  ngOnInit() {
     this.messages$.subscribe(() => this.cdr.detectChanges());
-    this.voiceRecognitionService.voices$.subscribe((result) => {
-      if (result?.transcript) this.sendMessage(result.transcript);
-    });
+    this.voiceRecognitionService.voices$
+      .pipe(untilDestroyed(this))
+      .subscribe((result) => {
+        if (result?.transcript) this.sendMessage(result.transcript);
+      });
   }
 
   startVoiceRecognition() {

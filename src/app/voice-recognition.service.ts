@@ -1,5 +1,5 @@
 import {Injectable, NgZone} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {Subject} from "rxjs";
 
 declare global {
   interface Window {
@@ -15,8 +15,8 @@ const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogni
 })
 export class VoiceRecognitionService {
   private recognition: typeof SpeechRecognition;
-  voices$ = new BehaviorSubject<SpeechRecognitionAlternative | null>(null);
-  listening$ = new BehaviorSubject(false);
+  voices$ = new Subject<SpeechRecognitionAlternative | null>();
+  listening$ = new Subject<boolean>();
 
   constructor(private zone: NgZone) {
     this.recognition = new SpeechRecognition();
