@@ -81,8 +81,7 @@ header a {
 
 .chat-container {
   display: flex;
-  flex-direction: column;
-  padding: 20px 10px;
+  flex-direction: column-reverse;
   height: calc(100vh - 135px);
   background: $secondary-bg-color;
   width: 100vw;
@@ -160,7 +159,7 @@ form {
 
   .dot-chat, .user-chat{
     justify-content: flex-start;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     text-transform: capitalize;
     padding: 4px;
   }
@@ -172,9 +171,13 @@ form {
     padding: 4px;
     background: $primary-bg-color;
     border-radius: 10px;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 
+  span {
+    font-size: 1.2rem;
+    padding: 2px 4px;
+  }
   .dot-chat-container, .user-chat-container{
     align-items: flex-end;
     border-radius: 0px 10px 10px;
@@ -196,6 +199,21 @@ form {
   }
 }
 
+.listening-animation {
+  background: $secondary-bg-color;
+  height: inherit;
+  width: inherit;
+  z-index: 4;
+  position: fixed;
+  border-radius: 40px 40px 0 0;
+  opacity: 0.9;
+
+  .loader {
+    background: $primary-bg-color;
+    border-radius: 50%;
+  }
+}
+
 
 @media (min-width: 769px){
   header, .chat-container {
@@ -213,6 +231,12 @@ form {
   .input-area {
     position: relative;
     border-radius: 0 0 30px 30px;
+  }
+
+  .listening-animation {
+    .loader {
+      left: 137.5px;
+    }
   }
 
   .loader {

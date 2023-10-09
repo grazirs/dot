@@ -7,7 +7,7 @@ main {
 
 .help-container{
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   color: $secondary-font-color;
   padding-right: 20px;
@@ -254,7 +254,7 @@ h2 {
 
 .fab:hover,
 .fab:focus {
-  background: $natural-person-gradient;
+  background: $primary-color $natural-person-gradient;
 }
 
 #dot-img {

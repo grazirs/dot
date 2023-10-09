@@ -1,4 +1,3 @@
-<!-- TODO <H1 *ngIf="voiceRecognitionService.listening$ | async as listening">Listening</H1> -->
 <div class="screen">
   <header>
     <div class="row back-container">
@@ -10,36 +9,46 @@
         <div class="dot-logo"></div>
         <span>dot.</span>
       </div>
-
     </div>
   </header>
   <main class="chat-container">
-    <ng-container *ngIf="assistantService.sessionId; else loading">
-      <div *ngFor="let message of messages$ | async">
-        <div class="column" [ngClass]="message.direction === 'RECEIVED' ? 'dot' : 'user'">
-          <span [ngClass]="message.direction === 'RECEIVED' ? 'dot-chat' : 'user-chat'">{{message.sender}}</span>
-          <div [ngClass]="message.direction === 'RECEIVED' ? 'dot-chat-container' : 'user-chat-container'" class="dot-chat-container column">
-            <p>{{message.text}}</p>
-            <span>{{message.createdAt | date:'shortTime'}}</span>
+    <div [ngStyle]="{'padding': '20px 10px'}">
+      <ng-container *ngIf="assistantService.sessionId; else loading">
+        <div *ngFor="let message of messages$ | async">
+          <div class="column" [ngClass]="message.direction === 'RECEIVED' ? 'dot' : 'user'">
+            <span [ngClass]="message.direction === 'RECEIVED' ? 'dot-chat' : 'user-chat'">{{message.sender}}</span>
+            <div [ngClass]="message.direction === 'RECEIVED' ? 'dot-chat-container' : 'user-chat-container'" class="dot-chat-container column">
+              <p>{{message.text}}</p>
+              <span>{{message.createdAt | date:'shortTime'}}</span>
+            </div>
           </div>
         </div>
-      </div>
-    </ng-container>
-    <ng-template #loading>
-      <div class="loader-container">
-        <div class="loader">
-          <div class="dot-loader-circle"></div>
-          <div class="dot-loader"></div>
+      </ng-container>
+      <ng-template #loading>
+        <div class="loader-container">
+          <div class="loader">
+            <div class="dot-loader-circle"></div>
+            <div class="dot-loader"></div>
+          </div>
+          <p>caricamento</p>
         </div>
-        <p>caricamento</p>
-      </div>
-    </ng-template>
+      </ng-template>
+    </div>
+      <div class="listening-animation" *ngIf="listening$ | async as listening" >
+        <div class="loader-container">
+          <div class="loader">
+            <div class="dot-loader-circle"></div>
+            <div class="dot-loader"></div>
+          </div>
+          <p>In ascolto...</p>
+        </div>
+    </div>
   </main>
   <section class="input-area row">
     <form (ngSubmit)="submit()" class="row">
       <input type="text" placeholder="Scrivi qui" [formControl]="textMessage">
-      <button class="btn-submit" type="submit">
-        <img src="../../assets/images/send.svg" alt="icone invia messagio" *ngIf="(textMessage.value?? '').length > 0">
+      <button class="btn-submit" type="submit" *ngIf="(textMessage.value?? '').length > 0">
+        <img src="../../assets/images/send.svg" alt="icone invia messagio">
       </button>
     </form>
     <button class="icon-container" (click)="startVoiceRecognition()">
