@@ -1,4 +1,7 @@
 @import "src/variables.scss";
+@function vh($quantity) {
+  @return calc(var(--vh, 1vh) * #{$quantity});
+}
 
 header {
   width: 100vw;
@@ -82,7 +85,8 @@ header a {
 .chat-container {
   display: flex;
   flex-direction: column-reverse;
-  height: calc(100vh - 135px);
+  height: 100vh; //fallback
+  height: calc(vh(100) - 135px);
   background: $secondary-bg-color;
   width: 100vw;
   border-radius: 40px 40px 0 0;

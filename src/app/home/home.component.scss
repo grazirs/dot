@@ -1,8 +1,13 @@
 @import "src/variables.scss";
 
+@function vh($quantity) {
+  @return calc(var(--vh, 1vh) * #{$quantity});
+}
+
 main {
   position: relative;
-  height: calc(100vh - 55px);
+  height: 100vh; //fallback
+  height: calc(vh(100) - 55px);
 }
 
 .help-container{
