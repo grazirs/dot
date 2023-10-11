@@ -1,13 +1,13 @@
 <div class="screen">
   <header>
     <div class="row back-container">
-      <a [routerLink]="['/']" class="back-btn">
+      <a [routerLink]="['/']" class="back-btn" title="Torna indietro">
         <img src="../../assets/images/arrow-white.svg" alt="">
         Indietro
       </a>
-      <div class="row dot-logo-container">
+      <div class="row dot-logo-container" aria-hidden="true">
         <div class="dot-logo"></div>
-        <span>dot.</span>
+        <span>dot</span>
       </div>
     </div>
   </header>
@@ -48,11 +48,11 @@
     <form (ngSubmit)="submit()" class="row">
       <input type="text" placeholder="Scrivi qui" [formControl]="textMessage">
       <button class="btn-submit" type="submit" *ngIf="(textMessage.value?? '').length > 0">
-        <img src="../../assets/images/send.svg" alt="icone invia messagio">
+        <img src="../../assets/images/send.svg" alt="invia messagio">
       </button>
     </form>
-    <button class="icon-container" (click)="startVoiceRecognition()">
-      <img src="../../assets/images/microphone-white.svg" alt="icone microfono" class="icon">
+    <button class="icon-container" (click)="startVoiceRecognition()" aria-label="Tocca il pulsante per parlare">
+      <img src="../../assets/images/microphone-white.svg" alt="" class="icon">
     </button>
   </section>
 </div>

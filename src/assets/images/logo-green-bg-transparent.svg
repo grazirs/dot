@@ -1,0 +1,7 @@
+
+<svg width="300" height="300">
+  <rect width="300" height="300" fill="transparent" />
+  <circle cx="150" cy="150" r="100" stroke="#258900" stroke-width="12" fill="transparent"/>
+  <circle cx="150" cy="150" r="40" stroke="#258900"  stroke-width="8" fill="#258900"/>
+</svg>
+
