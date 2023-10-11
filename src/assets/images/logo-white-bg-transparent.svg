@@ -1,6 +1,6 @@
 
 <svg width="300" height="300">
-  <rect width="300" height="300" fill="" />
-  <circle cx="150" cy="150" r="100" stroke="#fff" stroke-width="12" fill=""/>
+  <rect width="300" height="300" fill="transparent" />
+  <circle cx="150" cy="150" r="100" stroke="#fff" stroke-width="12" fill="transparent"/>
   <circle cx="150" cy="150" r="40" stroke="#fff" stroke-width="8" fill="#fff"/>
 </svg>
