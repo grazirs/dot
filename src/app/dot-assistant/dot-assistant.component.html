@@ -1,17 +1,17 @@
 <div class="screen">
   <header>
     <div class="row back-container">
-      <a [routerLink]="['/']" class="back-btn">
+      <a [routerLink]="['/']" class="back-btn" tabindex="4" title="Torna indietro">
         <img src="../../assets/images/arrow-white.svg" alt="">
         Indietro
       </a>
-      <div class="row dot-logo-container">
+      <div class="row dot-logo-container" aria-hidden="true">
         <div class="dot-logo"></div>
-        <span>dot.</span>
+        <span>dot</span>
       </div>
     </div>
   </header>
-  <main class="chat-container">
+  <main class="chat-container" tabindex="3">
     <div [ngStyle]="{'padding': '20px 10px'}">
       <ng-container *ngIf="assistantService.sessionId; else loading">
         <div *ngFor="let message of messages$ | async">
@@ -46,13 +46,13 @@
   </main>
   <section class="input-area row">
     <form (ngSubmit)="submit()" class="row">
-      <input type="text" placeholder="Scrivi qui" [formControl]="textMessage">
+      <input type="text" placeholder="Scrivi qui" [formControl]="textMessage" tabindex="2">
       <button class="btn-submit" type="submit" *ngIf="(textMessage.value?? '').length > 0">
-        <img src="../../assets/images/send.svg" alt="icone invia messagio">
+        <img src="../../assets/images/send.svg" alt="invia messagio">
       </button>
     </form>
-    <button class="icon-container" (click)="startVoiceRecognition()">
-      <img src="../../assets/images/microphone-white.svg" alt="icone microfono" class="icon">
+    <button class="icon-container" (click)="startVoiceRecognition()" tabindex="1" aria-label="Tocca il pulsante per parlare">
+      <img src="../../assets/images/microphone-white.svg" alt="" class="icon">
     </button>
   </section>
 </div>
