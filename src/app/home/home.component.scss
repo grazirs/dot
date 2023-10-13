@@ -175,7 +175,7 @@ h2 {
 }
 
 .operations-body {
-  height: calc(100vh - 527px);
+  height: calc(vh(100) - 527px);
   overflow-y: scroll;
 }
 

@@ -7,7 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'dot';
-  onResize() {
-    document.documentElement.style.setProperty('--vh', `${window.innerHeight/100}px`);
-  }
+
 }
