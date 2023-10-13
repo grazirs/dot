@@ -14,21 +14,24 @@ const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogni
   providedIn: 'root'
 })
 export class VoiceRecognitionService {
-  private recognition: typeof SpeechRecognition;
+  readonly recognition: typeof SpeechRecognition;
   voices$ = new Subject<SpeechRecognitionAlternative | null>();
   listening$ = new Subject<boolean>();
 
   constructor(private zone: NgZone) {
-    this.recognition = new SpeechRecognition();
-    this.recognition.lang = 'it-IT';
-    this.recognition.onresult = (event: { results: SpeechRecognitionResultList }) => {
-      this.voices$.next(event.results.item(0).item(0));
+    if (SpeechRecognition) {
+      this.recognition = new SpeechRecognition();
+      this.recognition.lang = 'it-IT';
+      this.recognition.onresult = (event: { results: SpeechRecognitionResultList }) => {
+        this.voices$.next(event.results.item(0).item(0));
+      }
+      this.recognition.onerror = () => this.listening$.next(false);
+      this.recognition.onend = () => this.zone.run(() => this.listening$.next(false));
     }
-    this.recognition.onerror = () => this.listening$.next(false);
-    this.recognition.onend = () => this.zone.run(() => this.listening$.next(false));
   }
 
   startSpeechToText() {
+    if (!this.recognition) throw Error('SpeechRecognition not available');
     this.listening$.next(true);
     this.recognition.start();
   }

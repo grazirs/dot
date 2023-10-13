@@ -77,8 +77,8 @@ header a {
   100%{
     width: 80px;
     height: 80px;
-    left: 0px;
-    top: 0px;
+    left: 0;
+    top: 0;
   }
 }
 
@@ -113,7 +113,7 @@ header a {
   border-radius: 20px;
   outline: $primary-color;
   padding: 0 16px;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
 }
 
 form {
@@ -184,7 +184,7 @@ form {
   }
   .dot-chat-container, .user-chat-container{
     align-items: flex-end;
-    border-radius: 0px 10px 10px;
+    border-radius: 0 10px 10px;
   }
 }
 
@@ -199,7 +199,7 @@ form {
 
   .user-chat-container, .user-chat-container p {
     background: $tertiary-bg-color;
-    border-radius: 10px 10px 0px 10px;
+    border-radius: 10px 10px 0 10px;
   }
 }
 

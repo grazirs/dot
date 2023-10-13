@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {AssistantService} from '../assistant.service';
 import {VoiceRecognitionService} from '../voice-recognition.service';
 import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
+import {debounceTime, Observable} from 'rxjs';
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {liveQuery} from "dexie";
 import {db} from "../db";
@@ -29,13 +29,20 @@ export class DotAssistantComponent implements OnInit {
   ngOnInit() {
     this.messages$.subscribe(() => this.cdr.detectChanges());
     this.voiceRecognitionService.voices$
-      .pipe(untilDestroyed(this))
+      .pipe(debounceTime(1000), untilDestroyed(this))
       .subscribe((result) => {
-        if (result?.transcript) this.sendMessage(result.transcript);
+        if (result?.transcript && result.transcript.length > 2) this.sendMessage(result.transcript);
       });
   }
 
   startVoiceRecognition() {
+    if (!this.voiceRecognitionService.recognition) {
+      const message =
+        'Purtroppo il tuo browser non supporta ancora la funzionalità di SpeechToText. Puoi interagire con Dot usando la tastiera';
+      this.voiceRecognitionService.readText(message);
+      alert(message);
+      return;
+    }
     this.voiceRecognitionService.startSpeechToText();
   }
 
